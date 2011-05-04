@@ -19,6 +19,7 @@ dependencies {
     
     //might be possible to use ant jars bundled with gradle
     compile group: 'org.apache.ant', name: 'ant', version: '1.8.1'
+    compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
@@ -35,3 +36,9 @@ uploadArchives {
 }
 
 task dist(dependsOn: [copyToLib, uploadArchives])
+
+task antTask(dependsOn: classes, type: Copy){
+  into "build/classes/main"
+  from "src/main/java"
+  include "**/antlib.xml"
+}
